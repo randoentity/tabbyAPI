@@ -27,7 +27,7 @@ from common.gen_logging import (
     log_generation_params,
     log_metrics,
 )
-from common.hardware import hardware_supports_flash_attn
+# from common.hardware import hardware_supports_flash_attn
 from common.health import HealthManager
 from common.multimodal import MultimodalEmbeddingWrapper
 from common.sampling import BaseSamplerRequest
@@ -140,17 +140,17 @@ class ExllamaV3Container(BaseModelContainer):
                     value / 1024 for value in autosplit_reserve_megabytes
                 ]
 
-        if not hardware_supports_flash_attn(gpu_device_list):
-            gpu_unsupported_message = (
-                "Unable to run ExllamaV3 because an unsupported GPU is "
-                "found in this configuration. \n"
-                "All GPUs must be ampere "
-                "(30 series) or newer. AMD GPUs are not supported."
-            )
-
-            logger.warning(gpu_unsupported_message)
-
-            raise RuntimeError(gpu_unsupported_message)
+        # if not hardware_supports_flash_attn(gpu_device_list):
+        #     gpu_unsupported_message = (
+        #         "Unable to run ExllamaV3 because an unsupported GPU is "
+        #         "found in this configuration. \n"
+        #         "All GPUs must be ampere "
+        #         "(30 series) or newer. AMD GPUs are not supported."
+        #     )
+        #
+        #     logger.warning(gpu_unsupported_message)
+        #
+        #     raise RuntimeError(gpu_unsupported_message)
 
         # Cache
         user_cache_size = unwrap(kwargs.get("cache_size"), self.max_seq_len)

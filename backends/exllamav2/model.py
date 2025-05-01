@@ -42,7 +42,7 @@ from common.gen_logging import (
     log_prompt,
     log_response,
 )
-from common.hardware import hardware_supports_flash_attn
+# from common.hardware import hardware_supports_flash_attn
 from common.health import HealthManager
 from common.multimodal import MultimodalEmbeddingWrapper
 from common.sampling import BaseSamplerRequest
@@ -265,7 +265,8 @@ class ExllamaV2Container(BaseModelContainer):
         # Also check if exl2 has disabled flash attention
         if exllama_disabled_flash_attn(
             self.config.no_flash_attn
-        ) or not hardware_supports_flash_attn(gpu_device_list):
+        ):
+            # or not hardware_supports_flash_attn(gpu_device_list) :
             gpu_unsupported_message = (
                 "An unsupported GPU is found in this configuration. "
                 "Switching to compatibility mode. \n"
